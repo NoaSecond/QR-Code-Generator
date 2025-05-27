@@ -1,3 +1,7 @@
+window.addEventListener("DOMContentLoaded", () => {
+    loadSettings();
+});
+
 function getSettingsFromURL() {
     const params = new URLSearchParams(window.location.search);
     return {
@@ -24,7 +28,6 @@ logoInput.addEventListener("change", () => {
         logoPreview.style.display = "none";
     }
 });
-
 
 const qrCode = new QRCodeStyling({
     width: 300,
@@ -63,6 +66,10 @@ function updateQR() {
             margin: margin
         }
     });
+
+    saveSettings();
+    updateFavicon(dotColor, bgColor);
+
     // Relancer animation
     const qrSvg = qrContainer.querySelector("svg");
     if (qrSvg) {
@@ -70,9 +77,6 @@ function updateQR() {
         qrSvg.offsetHeight; // Trigger reflow
         qrSvg.style.animation = null;
     }
-
-    saveSettings();
-    updateFavicon(dotColor, bgColor);
 
 }
 
@@ -108,12 +112,8 @@ function loadSettings() {
     document.getElementById("exportFormat").value = settings.format;
 
     updateQR();
+    displayHistory();
 }
-
-
-window.addEventListener("DOMContentLoaded", () => {
-    loadSettings();
-});
 
 function copyShareLink() {
     qrCode.getRawData("png").then(blob => {
@@ -205,8 +205,16 @@ function displayHistory() {
     });
 }
 
+function clearHistory() {
+    if (confirm("Souhaitez-vous vraiment effacer l’historique ?")) {
+        localStorage.removeItem("qrHistory");
+        document.getElementById("historyList").innerHTML = "";
+        alert("✅ Historique effacé !");
+    }
+}
+
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js")
-    .then(() => console.log("✅ Service Worker enregistré"))
-    .catch(err => console.error("❌ Erreur SW:", err));
+    navigator.serviceWorker.register("/service-worker.js")
+        .then(() => console.log("✅ Service Worker enregistré"))
+        .catch(err => console.error("❌ Erreur SW:", err));
 }
