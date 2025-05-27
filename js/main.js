@@ -14,10 +14,9 @@ function getSettingsFromURL() {
     };
 }
 
-const logoInput = document.getElementById("logoInput");
-const logoPreview = document.getElementById("logoPreview");
-
 logoInput.addEventListener("change", () => {
+    const logoInput = document.getElementById("logoInput");
+    const logoPreview = document.getElementById("logoPreview");
     const file = logoInput.files[0];
     if (file) {
         const imageURL = URL.createObjectURL(file);
@@ -42,7 +41,7 @@ const qrCode = new QRCodeStyling({
 const qrContainer = document.getElementById("qr-code");
 qrCode.append(qrContainer);
 
-function updateQR() {
+function updateQR(save = true) {
     const text = document.getElementById("text").value;
     const dotColor = document.getElementById("dotColor").value;
     const bgColor = document.getElementById("bgColor").value;
@@ -67,7 +66,10 @@ function updateQR() {
         }
     });
 
-    saveSettings();
+    if (save && text.trim() !== "") {
+        saveSettings();
+    }
+    
     updateFavicon(dotColor, bgColor);
 
     // Relancer animation
@@ -111,7 +113,7 @@ function loadSettings() {
     document.getElementById("marginInput").value = settings.margin;
     document.getElementById("exportFormat").value = settings.format;
 
-    updateQR();
+    updateQR(false);
     displayHistory();
 }
 
