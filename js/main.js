@@ -18,13 +18,19 @@ logoInput.addEventListener("change", () => {
     const logoInput = document.getElementById("logoInput");
     const logoPreview = document.getElementById("logoPreview");
     const file = logoInput.files[0];
+    const marginInput = document.getElementById("marginInput");
+    const marginLabel = document.querySelector("label[for='marginInput']");
     if (file) {
         const imageURL = URL.createObjectURL(file);
         logoPreview.src = imageURL;
         logoPreview.style.display = "block";
+        marginInput.style.display = "inline-block";
+        marginLabel.style.display = "inline-block";
     } else {
         logoPreview.src = "";
         logoPreview.style.display = "none";
+        marginInput.style.display = "none";
+        marginLabel.style.display = "none";
     }
 });
 
@@ -69,7 +75,7 @@ function updateQR(save = true) {
     if (save && text.trim() !== "") {
         saveSettings();
     }
-    
+
     updateFavicon(dotColor, bgColor);
 
     // Relancer animation
