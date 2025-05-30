@@ -213,7 +213,7 @@ function displayHistory() {
     history.forEach((s, i) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = `?text=${encodeURIComponent(s.text)}&dotColor=${encodeURIComponent(s.dotColor)}&bgColor=${encodeURIComponent(s.bgColor)}&dotStyle=${encodeURIComponent(s.dotStyle)}&margin=${encodeURIComponent(s.margin)}&format=${encodeURIComponent(s.format)}`;
+        a.href = `?text=${encodeURIComponent(s.text)}&dotColor=${encodeURIComponent(s.dotColor)}&bgColor=${encodeURIComponent(s.bgColor)}&dotStyle=${encodeURIComponent(s.dotStyle)}&margin=${encodeURIComponent(s.margin)}&format=${encodeURIComponent(s.format)}#qr-code`;
         a.textContent = `${s.text}`;
         li.appendChild(a);
         list.appendChild(li);
