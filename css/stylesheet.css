@@ -157,14 +157,23 @@ input[type=file]::file-selector-button {
     font-size: 1rem;
 }
 
-input[type="color" i]::-webkit-color-swatch-wrapper,
+input[type="color" i]::-webkit-color-swatch-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
 input[type="color" i]::-moz-color-swatch-wrapper {
     width: 100%;
     height: 100%;
     padding: 0;
 }
 
-input[type="color" i]::-webkit-color-swatch,
+input[type="color" i]::-webkit-color-swatch {
+    border-radius: 500px;
+    border: solid 1px #ccc;
+}
+
 input[type="color" i]::-moz-color-swatch {
     border-radius: 500px;
     border: solid 1px #ccc;
