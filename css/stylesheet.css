@@ -1,56 +1,25 @@
+/* --- Variables Globales (Thèmes) --- */
 :root {
-    --bg: #ffffff;
-    --text: #000000;
+    --bg-color: #f4f7f6;
+    --text-color: #111;
+    --header-bg: #ffffff;
+    --border-color: #ddd;
+    --card-bg: #ffffff;
+    --accent-color: #007bff;
+    --primary-color: #1a73e8;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    z-index: 9999;
+body.dark-theme {
+    --bg-color: #121212;
+    --text-color: #f1f1f1;
+    --header-bg: #1e1e1e;
+    --border-color: #333;
+    --card-bg: #1e1e1e;
 }
 
-::-webkit-scrollbar-track {
-    background: #797979ab;
-    border-radius: 4px;
-    z-index: 9999;
-}
-
-::-webkit-scrollbar-thumb {
-    width: 2.4px;
-    background-color: hsla(0, 0%, 100%, .2);
-    border-radius: 4px;
-    border: 1px solid transparent;
-    z-index: 9999;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: black;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #0D0D0D;
-        --text: #ffffff;
-    }
-}
-
-a,
-p,
-h1,
-h2,
-h3 {
-    text-decoration: none;
-    color: var(--text);
-}
-
-h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 1rem 0;
-}
-
+/* --- Styles de Base --- */
 * {
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.15s ease-in-out;
     font-family: "Open Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
@@ -59,146 +28,120 @@ h1 {
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: sans-serif;
-    text-align: center;
-    padding: 2rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
-    padding: 0;
-    background: #A770EF;
-    background: -webkit-linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
-    background: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+header .controls {
+    display: flex;
+    gap: 1rem;
 }
 
 main {
     display: flex;
-    justify-content: space-between;
-    width: 100vw;
-    min-height: 100vh;
+    justify-content: space-around;
+    padding: 1rem;
+    gap: 2rem;
 }
 
 main>div {
-    border-radius: 15px;
-    background-color: var(--bg);
-    margin: 50px;
-    padding: 15px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#qr-generator {
     display: flex;
     flex-direction: column;
-}
-
-div#qr-code {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
-main>div#qr-generator {
-    justify-content: space-between;
+#history {
+    flex-basis: 30%;
 }
 
-main>div#history {
-    height: fit-content;
-    max-height: calc(100vh - 130px);
-    display: flex;
-    align-items: center;
+#history h2 {
+    text-align: center;
+    margin-top: 0;
 }
 
-main>div#history button {
-    margin-top: 25px;
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: all 0.3s;
 }
 
-main>div#history>#historyList {
-    max-height: 100%;
-    overflow-y: scroll;
-    padding-right: 10px;
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-.controls {
-    margin: 1rem 0;
+footer a:hover {
+    text-decoration: underline;
 }
 
-input,
-select,
-button {
+/* --- Contrôles --- */
+.controls input,
+.controls select,
+.controls button {
     margin: 0.5rem;
     padding: 0.4rem;
     border-radius: 500px;
-    border: solid 1px transparent;
-    background-color: #f0f0f0;
-    color: black;
+    border: solid 1px var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     cursor: pointer;
     outline: none;
 }
 
-input:hover,
-select:hover,
-button:hover {
-    background-color: #e0e0e0;
+.controls input:hover,
+.controls select:hover,
+.controls button:hover {
+    background-color: var(--border-color);
 }
 
-input:active,
-select:active,
-button:focus-visible {
-    border: solid 1px #ccc;
-}
-
-input[type=text] {
-    cursor: text;
-}
-
-input[type=file]::file-selector-button {
-    border-radius: 500px;
-    background-color: #f0f0f0;
-    outline: none;
-    border: solid 1px #ccc;
-    cursor: pointer;
-    padding: 0.4rem 0.8rem;
-    font-size: 1rem;
-}
-
-input[type="color" i]::-webkit-color-swatch-wrapper {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-}
-
-input[type="color" i]::-moz-color-swatch-wrapper {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-}
-
-input[type="color" i]::-webkit-color-swatch {
-    border-radius: 500px;
-    border: solid 1px #ccc;
-}
-
-input[type="color" i]::-moz-color-swatch {
-    border-radius: 500px;
-    border: solid 1px #ccc;
-}
-
-button {
-    cursor: pointer;
-}
-
-ul {
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    list-style: none;
-    text-align: left;
+.controls input:active,
+.controls select:active,
+.controls button:focus-visible {
+    border-color: var(--primary-color);
 }
 
 #qr-code svg {
     animation: fadeIn 0.5s ease-in-out;
-}
-
-#qr-generator>a {
-    margin-top: 15px;
 }
 
 @keyframes fadeIn {
@@ -209,4 +152,42 @@ li {
     to {
         opacity: 1;
     }
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+li {
+    list-style: none;
+    text-align: left;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* --- Style pour le bouton d'effacement de l'historique --- */
+#clear-history {
+    display: block;
+    margin: 1rem auto 0 auto;
+    padding: 0.4rem 1rem;
+    border-radius: 500px;
+    border: solid 1px var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+    outline: none;
+    font-size: 0.9rem;
+    transition: all 0.15s ease-in-out;
+}
+
+#clear-history:hover {
+    background-color: var(--border-color);
+}
+
+#clear-history:active,
+#clear-history:focus-visible {
+    border-color: var(--primary-color);
 }
